@@ -1,0 +1,36 @@
+[
+  {
+    "id": "portfolio",
+    "name": "meethannes.com",
+    "description": "This personal portfolio site, built with Next.js, Tailwind CSS, and TypeScript.",
+    "tags": ["web", "next.js", "side-project"],
+    "url": "https://meethannes.com",
+    "featured": true,
+    "year": 2026
+  },
+  {
+    "id": "startup-alpha",
+    "name": "Startup Project",
+    "description": "A venture I co-founded to solve an interesting problem. Details coming soon.",
+    "tags": ["startup", "saas"],
+    "featured": true,
+    "year": 2025
+  },
+  {
+    "id": "side-project",
+    "name": "Side Project",
+    "description": "An experimental project exploring new ideas and technologies.",
+    "tags": ["experiment", "side-project"],
+    "featured": false,
+    "year": 2025
+  },
+  {
+    "id": "open-source",
+    "name": "Open Source Contribution",
+    "description": "Contributing to the developer community through open source.",
+    "tags": ["open-source", "web"],
+    "github": "https://github.com/hannestayronen",
+    "featured": false,
+    "year": 2024
+  }
+]

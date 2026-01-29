@@ -1,0 +1,44 @@
+[
+  {
+    "id": "1",
+    "src": "/images/life/placeholder-1.jpg",
+    "alt": "Adventure in the mountains",
+    "category": "travel",
+    "aspectRatio": "landscape"
+  },
+  {
+    "id": "2",
+    "src": "/images/life/placeholder-2.jpg",
+    "alt": "Sports achievement",
+    "category": "sports",
+    "aspectRatio": "square"
+  },
+  {
+    "id": "3",
+    "src": "/images/life/placeholder-3.jpg",
+    "alt": "City exploration",
+    "category": "travel",
+    "aspectRatio": "portrait"
+  },
+  {
+    "id": "4",
+    "src": "/images/life/placeholder-4.jpg",
+    "alt": "Team celebration",
+    "category": "moments",
+    "aspectRatio": "landscape"
+  },
+  {
+    "id": "5",
+    "src": "/images/life/placeholder-5.jpg",
+    "alt": "Competition day",
+    "category": "sports",
+    "aspectRatio": "square"
+  },
+  {
+    "id": "6",
+    "src": "/images/life/placeholder-6.jpg",
+    "alt": "Special moment",
+    "category": "moments",
+    "aspectRatio": "landscape"
+  }
+]
