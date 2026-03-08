@@ -1,10 +1,10 @@
 [
   {
     "id": "portfolio",
-    "name": "meethannes.com",
+    "name": "hannestayronen.com",
     "description": "This personal portfolio site, built with Next.js, Tailwind CSS, and TypeScript.",
     "tags": ["web", "next.js", "side-project"],
-    "url": "https://meethannes.com",
+    "url": "https://hannestayronen.com",
     "featured": true,
     "year": 2026
   },
@@ -29,7 +29,7 @@
     "name": "Open Source Contribution",
     "description": "Contributing to the developer community through open source.",
     "tags": ["open-source", "web"],
-    "github": "https://github.com/hannestayronen",
+    "github": "https://github.com/hanski-t",
     "featured": false,
     "year": 2024
   }

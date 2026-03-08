@@ -20,11 +20,11 @@ export const metadata: Metadata = {
     template: "%s | Hannes Täyrönen",
   },
   description: "Builder, startup founder, explorer of the world. Building things, breaking things, figuring it out.",
-  metadataBase: new URL("https://meethannes.com"),
+  metadataBase: new URL("https://hannestayronen.com"),
   openGraph: {
     title: "Hannes Täyrönen",
     description: "Builder, startup founder, explorer of the world.",
-    url: "https://meethannes.com",
+    url: "https://hannestayronen.com",
     siteName: "Hannes Täyrönen",
     locale: "en_US",
     type: "website",

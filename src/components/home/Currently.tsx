@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 // Update these items quarterly
 const currentItems = [
-  "Building meethannes.com (you're looking at it)",
+  "Building hannestayronen.com (you're looking at it)",
   "Exploring AI tools and new ways of working",
   "Always looking for the next adventure",
 ];
