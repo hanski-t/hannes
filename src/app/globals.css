@@ -7,8 +7,9 @@
   --color-muted: #262626;
   --color-muted-foreground: #a3a3a3;
   --color-border: #262626;
-  --color-accent: #60a5fa;
+  --color-accent: #f97316;
   --color-accent-foreground: #fafafa;
+  --color-surface: #111111;
 
   /* Fonts */
   --font-sans: var(--font-geist-sans), system-ui, sans-serif;
@@ -19,6 +20,15 @@ body {
   background: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(249, 115, 22, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Custom scrollbar for dark theme */
@@ -44,4 +54,23 @@ body {
 ::selection {
   background: var(--color-accent);
   color: var(--color-accent-foreground);
+}
+
+/* Blinking cursor for terminal aesthetic */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1.2s step-start infinite;
+}
+
+/* Hero name glow on hover */
+.name-glow {
+  transition: text-shadow 0.4s ease;
+}
+
+.name-glow:hover {
+  text-shadow: 0 0 60px rgba(249, 115, 22, 0.2);
 }
