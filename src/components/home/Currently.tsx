@@ -2,11 +2,12 @@
 
 import { motion } from "framer-motion";
 
-// Update these items quarterly
+// Update these items (and the date) whenever things change
+const lastUpdated = "Oct 2026";
 const currentItems = [
-  "building this website",
-  "exploring AI tools and new ways of working",
-  "looking for what's next",
+  "just graduated from LUT — M.Sc. (Tech) done",
+  "building my own projects",
+  "exploring what's next — to be continued",
 ];
 
 export function Currently() {
@@ -31,7 +32,7 @@ export function Currently() {
           ))}
         </ul>
         <div className="pl-4 text-muted-foreground/40 pt-1">
-          last updated · Q1 2026{" "}
+          last updated · {lastUpdated}{" "}
           <span className="cursor-blink">_</span>
         </div>
       </div>

@@ -1,42 +1,48 @@
 export interface Section {
   id: string;
   title: string;
+  period: string;
   shortDescription: string;
   description: string;
+  href?: string; // external link, shown as the title link
 }
 
 export const sections: Section[] = [
   {
-    id: "websites",
-    title: "Websites",
+    id: "pukkiluuri",
+    title: "PukkiLuuri",
+    period: "Dec 2025",
     shortDescription:
-      "Building digital products from scratch — portfolio sites, landing pages, and web tools.",
+      "A Finnish-speaking AI Santa you can call on an ordinary phone line. Built in three weeks and featured in major Finnish media.",
     description:
-      "A collection of websites and web projects I've built. More details coming soon.",
-  },
-  {
-    id: "events",
-    title: "Events",
-    shortDescription:
-      "Producing and organizing events in the Finnish startup ecosystem — from hackathons to demo days.",
-    description:
-      "Events I've been involved in organizing or producing. More details coming soon.",
+      "PukkiLuuri is an AI-powered phone line where kids can call Joulupukki and chat with him in Finnish or English. More details coming soon.",
+    href: "https://pukkiluuri.fi",
   },
   {
     id: "loop-energy",
     title: "LoopEnergy",
+    period: "2025",
     shortDescription:
       "A startup building solutions to give used EV batteries a second life.",
     description:
       "LoopEnergy is a startup I co-founded focused on repurposing used electric vehicle batteries. More details coming soon.",
   },
   {
-    id: "side-projects",
-    title: "Side Projects",
+    id: "founders-journey",
+    title: "Founder's Journey",
+    period: "Spring 2026",
     shortDescription:
-      "Small experiments, tools, and ideas built for learning, fun, or because they seemed interesting.",
+      "A gothic startup adventure game you can play in the browser. Built for LUT's Game Development Project course.",
     description:
-      "A collection of side projects and experiments. More details coming soon.",
+      "Founder's Journey is a browser game built as a course project at LUT University. More details coming soon.",
+    href: "https://game.hannestayronen.com",
+  },
+  {
+    id: "ponsai",
+    title: "Ponsai",
+    period: "Feb – May 2026",
+    shortDescription: "A health AI agent built on top of OpenClaw.",
+    description: "Ponsai is a health AI agent built on top of OpenClaw. More details coming soon.",
   },
 ];
 

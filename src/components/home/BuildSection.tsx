@@ -2,7 +2,36 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { sections } from "@/lib/sections";
+import { ArrowUpRight } from "lucide-react";
+import { sections, Section } from "@/lib/sections";
+
+function ProjectRow({ section }: { section: Section }) {
+  const title = section.href ? (
+    <a
+      href={section.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-1 font-medium text-foreground hover:text-accent transition-colors"
+    >
+      {section.title}
+      <ArrowUpRight className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+    </a>
+  ) : (
+    <span className="font-medium text-foreground">{section.title}</span>
+  );
+
+  return (
+    <motion.div whileHover={{ y: -2 }} transition={{ duration: 0.15 }}>
+      <div className="flex flex-col gap-1">
+        <div className="flex items-baseline justify-between gap-4">
+          {title}
+          <span className="shrink-0 text-sm text-muted-foreground">{section.period}</span>
+        </div>
+        <span className="text-sm text-muted-foreground">{section.shortDescription}</span>
+      </div>
+    </motion.div>
+  );
+}
 
 export function BuildSection() {
   const [expanded, setExpanded] = useState(false);
@@ -31,17 +60,7 @@ export function BuildSection() {
 
       <div className="space-y-4">
         {preview.map((section) => (
-          <motion.div
-            key={section.id}
-            whileHover={{ y: -2 }}
-            transition={{ duration: 0.15 }}
-            className="group"
-          >
-            <div className="flex flex-col gap-1">
-              <span className="font-medium text-foreground">{section.title}</span>
-              <span className="text-sm text-muted-foreground">{section.shortDescription}</span>
-            </div>
-          </motion.div>
+          <ProjectRow key={section.id} section={section} />
         ))}
       </div>
 
@@ -56,17 +75,7 @@ export function BuildSection() {
           >
             <div className="mt-4 space-y-4">
               {rest.map((section) => (
-                <motion.div
-                  key={section.id}
-                  whileHover={{ y: -2 }}
-                  transition={{ duration: 0.15 }}
-                  className="group"
-                >
-                  <div className="flex flex-col gap-1">
-                    <span className="font-medium text-foreground">{section.title}</span>
-                    <span className="text-sm text-muted-foreground">{section.shortDescription}</span>
-                  </div>
-                </motion.div>
+                <ProjectRow key={section.id} section={section} />
               ))}
             </div>
           </motion.div>
