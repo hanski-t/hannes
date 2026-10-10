@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface GalleryItem {
@@ -20,13 +21,18 @@ const previewRotations = [-2, 1.5, -1];
 function GalleryThumb({ item, rotation = 0 }: { item: GalleryItem; rotation?: number }) {
   return (
     <div
-      className="h-40 md:h-48 flex-1 min-w-0 overflow-hidden rounded-md bg-muted transition-transform duration-300 ease-out"
+      className="relative h-40 md:h-48 flex-1 min-w-0 overflow-hidden rounded-md bg-muted transition-transform duration-300 ease-out"
       style={{ transform: `rotate(${rotation}deg)` }}
       onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.transform = "rotate(0deg)"; }}
       onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.transform = `rotate(${rotation}deg)`; }}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={item.src} alt={item.alt} className="h-full w-full object-cover" />
+      <Image
+        src={item.src}
+        alt={item.alt}
+        fill
+        sizes="(min-width: 1024px) 320px, 33vw"
+        className="object-cover"
+      />
     </div>
   );
 }

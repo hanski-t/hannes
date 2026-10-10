@@ -1,44 +1,44 @@
 [
   {
-    "id": "1",
-    "src": "/images/life/placeholder-1.jpg",
-    "alt": "Adventure in the mountains",
-    "category": "travel",
-    "aspectRatio": "landscape"
-  },
-  {
-    "id": "2",
-    "src": "/images/life/placeholder-2.jpg",
-    "alt": "Sports achievement",
-    "category": "sports",
-    "aspectRatio": "square"
-  },
-  {
-    "id": "3",
-    "src": "/images/life/placeholder-3.jpg",
-    "alt": "City exploration",
+    "id": "golden-gate-bridge",
+    "src": "/pictures/golden_gate_bridge.jpg",
+    "alt": "On a boat in front of the Golden Gate Bridge at sunset",
     "category": "travel",
     "aspectRatio": "portrait"
   },
   {
-    "id": "4",
-    "src": "/images/life/placeholder-4.jpg",
-    "alt": "Team celebration",
-    "category": "moments",
-    "aspectRatio": "landscape"
-  },
-  {
-    "id": "5",
-    "src": "/images/life/placeholder-5.jpg",
-    "alt": "Competition day",
+    "id": "winter-warrior-2025",
+    "src": "/pictures/winter_warrior_2025.jpg",
+    "alt": "Wading through ice-cold water at Winter Warrior 2025",
     "category": "sports",
-    "aspectRatio": "square"
+    "aspectRatio": "landscape"
   },
   {
-    "id": "6",
-    "src": "/images/life/placeholder-6.jpg",
-    "alt": "Special moment",
-    "category": "moments",
-    "aspectRatio": "landscape"
+    "id": "lemur-selfie",
+    "src": "/pictures/lemur_selfie.jpg",
+    "alt": "Selfie with a lemur sitting on my shoulder",
+    "category": "travel",
+    "aspectRatio": "portrait"
+  },
+  {
+    "id": "mountain-hike",
+    "src": "/pictures/mountain_hike.jpg",
+    "alt": "Hiking with poles on a lookout above a valley",
+    "category": "travel",
+    "aspectRatio": "portrait"
+  },
+  {
+    "id": "san-francisco-bay-boat",
+    "src": "/pictures/san_francisco_bay_boat.jpg",
+    "alt": "Smiling on a boat on San Francisco Bay",
+    "category": "travel",
+    "aspectRatio": "portrait"
+  },
+  {
+    "id": "city-selfie-backpack",
+    "src": "/pictures/city_selfie_backpack.jpg",
+    "alt": "Selfie with a backpack while exploring a city",
+    "category": "travel",
+    "aspectRatio": "portrait"
   }
 ]
