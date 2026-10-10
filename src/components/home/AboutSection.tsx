@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 type Category = "experience" | "school" | "volunteering";
+type YearMonth = [number, number]; // [year, 0-indexed month]
 
 type TItem = {
   id: string;
@@ -13,9 +14,9 @@ type TItem = {
   role?: string;
   period?: string;
   logo?: string;
-  logoDark?: boolean;
-  start: [number, number]; // [year, 0-indexed month]
-  end: [number, number];
+  logoOnLight?: boolean; // dark logo that needs a light chip behind it
+  start: YearMonth;
+  end: YearMonth | "now"; // "now" = ongoing, bar runs into the future
   category: Category;
   description?: string;
 };
@@ -45,8 +46,13 @@ const ITEMS: TItem[] = [
     description: "Operating a cardboard machine's length cutter at the Imatra mill.",
   },
   {
+    id: "lutes-vp", label: "LUTES VP", role: "Partnerships & Funds Manager | Vice President", period: "Jan – Dec 2023",
+    logo: "/logos/lutes.png", start: [2023, 0], end: [2023, 11], category: "experience",
+    description: "Securing funding and maintaining partner relations. Developing connections to the South Karelian and Finnish-wide startup ecosystem.",
+  },
+  {
     id: "forward", label: "Forward Accelerator", role: "Head of Forward Accelerator", period: "Jan – Jun 2024",
-    logo: "/logos/forward_accelerator.png", logoDark: true, start: [2024, 0], end: [2024, 5], category: "experience",
+    logo: "/logos/forward_accelerator.png", start: [2024, 0], end: [2024, 5], category: "experience",
     description: "Building a leading student-run idea accelerator in Finland.",
   },
   {
@@ -55,9 +61,9 @@ const ITEMS: TItem[] = [
     description: "Helped Founder Residency teams build their startups. Supported with operational affairs and executed ad-hoc tasks.",
   },
   {
-    id: "stealth", label: "Stealth Startup", role: "Founder", period: "Mar – Sep 2025",
+    id: "loop-energy", label: "LoopEnergy", role: "Founder", period: "Mar – Sep 2025",
     logo: "/logos/stealth_startup.jpg", start: [2025, 2], end: [2025, 8], category: "experience",
-    description: "Built solutions to utilize used EV batteries.",
+    description: "Built solutions to give used EV batteries a second life.",
   },
   {
     id: "pukki", label: "PukkiLuuri.fi", role: "Founder", period: "Dec 2025",
@@ -65,9 +71,19 @@ const ITEMS: TItem[] = [
     description: "Built a Finnish-speaking AI Santa phone line in three weeks. Featured in major media in Finland.",
   },
   {
-    id: "site", label: "hannestayronen.com", role: "Building", period: "2026 →",
-    start: [2026, 0], end: [2026, 2], category: "experience",
-    description: "This site. Still figuring out what's next.",
+    id: "ponsai", label: "Ponsai", role: "Side project", period: "Feb – May 2026",
+    start: [2026, 1], end: [2026, 4], category: "experience",
+    description: "A health AI agent built on top of OpenClaw.",
+  },
+  {
+    id: "sumitomo", label: "Sumitomo SHI FW", role: "Thesis Researcher", period: "Apr – Sep 2026",
+    logo: "/logos/sumitomo_shi_fw.png", start: [2026, 3], end: [2026, 8], category: "experience",
+    description: "Figured out how a 1,600-person company moves from fragmented individual AI use to real, org-wide AI mastery.",
+  },
+  {
+    id: "exploring", label: "Exploring", role: "To be continued", period: "Oct 2026 →",
+    start: [2026, 9], end: "now", category: "experience",
+    description: "Thesis done, degree done. Building my own projects and figuring out what's next.",
   },
 
   // School
@@ -77,17 +93,18 @@ const ITEMS: TItem[] = [
   },
   {
     id: "lut-bsc", label: "LUT — BScTech", role: "BScTech, Energy Technology", period: "Aug 2021 – May 2024",
-    logo: "/logos/lut_university.png", start: [2021, 7], end: [2024, 4], category: "school",
+    logo: "/logos/lut_university.png", logoOnLight: true, start: [2021, 7], end: [2024, 4], category: "school",
   },
   {
-    id: "lut-msc", label: "LUT — MSc", role: "MSc, Industrial Engineering and Management", period: "Aug 2024 – 2026",
-    logo: "/logos/lut_university.png", start: [2024, 7], end: [2026, 5], category: "school",
+    id: "lut-msc", label: "LUT — MSc", role: "Master of Technology, Industrial Engineering and Management", period: "Aug 2024 – Sep 2026",
+    logo: "/logos/lut_university.png", logoOnLight: true, start: [2024, 7], end: [2026, 8], category: "school",
+    description: "Major in Global Management of Innovation and Technology, minor in Software Engineering. Thesis: From fragmented AI use to systematic adoption in industrial knowledge work — a case study on building organizational AI capability.",
   },
 
   // Volunteering
   {
     id: "slush-2021", label: "Slush", role: "Construction Volunteer", period: "Oct – Dec 2021",
-    logo: "/logos/slush.png", start: [2021, 9], end: [2021, 11], category: "volunteering",
+    logo: "/logos/slush.png", logoOnLight: true, start: [2021, 9], end: [2021, 11], category: "volunteering",
   },
   {
     id: "lutes-events", label: "LUTES", role: "Events Team Member", period: "Jan – Dec 2022",
@@ -95,7 +112,7 @@ const ITEMS: TItem[] = [
   },
   {
     id: "armatuuri", label: "Armatuuri", role: "Business Relations Officer", period: "Jan – Dec 2022",
-    logo: "/logos/armatuuri.png", start: [2022, 0], end: [2022, 11], category: "volunteering",
+    logo: "/logos/armatuuri.png", logoOnLight: true, start: [2022, 0], end: [2022, 11], category: "volunteering",
   },
   {
     id: "lut-invest", label: "LUT Invest", role: "Founding Contributor | Board Member", period: "Feb – Dec 2022",
@@ -103,12 +120,7 @@ const ITEMS: TItem[] = [
   },
   {
     id: "slush-2022", label: "Slush", role: "Partner Buddy Volunteer, Nokia", period: "Sep – Nov 2022",
-    logo: "/logos/slush.png", start: [2022, 8], end: [2022, 10], category: "volunteering",
-  },
-  {
-    id: "lutes-vp", label: "LUTES VP", role: "Partnerships & Funds Manager | Vice President", period: "Jan – Dec 2023",
-    logo: "/logos/lutes.png", start: [2023, 0], end: [2023, 11], category: "volunteering",
-    description: "Securing funding and maintaining partner relations. Developing connections to the South Karelian and Finnish-wide startup ecosystem.",
+    logo: "/logos/slush.png", logoOnLight: true, start: [2022, 8], end: [2022, 10], category: "volunteering",
   },
   {
     id: "arctic", label: "ArcticStartup", role: "Event Help Volunteer", period: "May – Jun 2023",
@@ -121,47 +133,57 @@ const ITEMS: TItem[] = [
   },
   {
     id: "junction", label: "Junction", role: "Event Help Team Lead", period: "Jul – Nov 2024",
-    logo: "/logos/junction.png", start: [2024, 6], end: [2024, 10], category: "volunteering",
+    logo: "/logos/junction.png", logoOnLight: true, start: [2024, 6], end: [2024, 10], category: "volunteering",
     description: "Helped to build the world's biggest hackathon.",
   },
   {
     id: "slush-2025", label: "Slush", role: "Speaker Buddy", period: "Nov 2025",
-    logo: "/logos/slush.png", start: [2025, 10], end: [2025, 11], category: "volunteering",
+    logo: "/logos/slush.png", logoOnLight: true, start: [2025, 10], end: [2025, 11], category: "volunteering",
   },
 ];
 
 // ─── Layout constants ─────────────────────────────────────────────────────────
 
-const START_YEAR    = 2014;
-const TODAY_YEAR    = 2026;
-const TODAY_MONTH   = 2;         // March 2026 (0-indexed)
-const FUTURE_MONTHS = 4;         // buffer shown to the left of "now"
-const PX_PER_MONTH  = 32;        // tighter scale
-const LABEL_W       = 120;       // sticky left label column
-const L_PAD         = 24;
-const R_PAD         = 32;
-const BAR_H         = 26;
-const BAR_GAP       = 6;
-const SECTION_V_PAD = 16;
+// Only used by the timeline overlay, which renders client-side, so reading the
+// current date here can't cause a server/client hydration mismatch.
+const NOW = new Date();
 
-const TODAY_OFFSET = (TODAY_YEAR - START_YEAR) * 12 + TODAY_MONTH; // 146
-const TOTAL_DISP   = TODAY_OFFSET + FUTURE_MONTHS;                  // 150
-const CONTENT_W    = TOTAL_DISP * PX_PER_MONTH + L_PAD + R_PAD;    // 4856
-const TODAY_X      = L_PAD + FUTURE_MONTHS * PX_PER_MONTH;         // 152
+const START_YEAR    = 2014;
+const TODAY_YEAR    = NOW.getFullYear();
+const TODAY_MONTH   = NOW.getMonth(); // 0-indexed
+const FUTURE_MONTHS = 3;         // buffer shown to the left of "now"
+const PX_PER_MONTH  = 24;
+const LABEL_W       = 104;       // sticky left label column
+const L_PAD         = 16;
+const R_PAD         = 32;
+const AXIS_H        = 32;
+const BAR_H         = 24;
+const BAR_GAP       = 4;
+const SECTION_V_PAD = 10;
+
+const TODAY_OFFSET = (TODAY_YEAR - START_YEAR) * 12 + TODAY_MONTH;
+const TOTAL_DISP   = TODAY_OFFSET + FUTURE_MONTHS;
+const CONTENT_W    = TOTAL_DISP * PX_PER_MONTH + L_PAD + R_PAD;
+const TODAY_X      = L_PAD + FUTURE_MONTHS * PX_PER_MONTH;
 
 const YEARS = Array.from({ length: TODAY_YEAR - START_YEAR + 1 }, (_, i) => TODAY_YEAR - i);
 
 // ─── Coordinate helpers ───────────────────────────────────────────────────────
 
-// x in bars area: left = present (now+buffer), right = past
-function rX(year: number, month: number): number {
-  const off = (year - START_YEAR) * 12 + month;
-  return L_PAD + (TOTAL_DISP - off) * PX_PER_MONTH;
+// Months since START_YEAR. "now" reaches the far edge of the future buffer.
+function monthOffset(ym: YearMonth | "now"): number {
+  if (ym === "now") return TOTAL_DISP - 1;
+  return (ym[0] - START_YEAR) * 12 + ym[1];
 }
 
-function barGeom(start: [number, number], end: [number, number]): { x: number; w: number } {
-  const startOff = (start[0] - START_YEAR) * 12 + start[1];
-  const endOff   = (end[0]   - START_YEAR) * 12 + end[1];
+// x in bars area: left = present (now+buffer), right = past
+function rX(year: number, month: number): number {
+  return L_PAD + (TOTAL_DISP - monthOffset([year, month])) * PX_PER_MONTH;
+}
+
+function barGeom(start: YearMonth, end: YearMonth | "now"): { x: number; w: number } {
+  const startOff = monthOffset(start);
+  const endOff   = monthOffset(end);
   const months   = endOff - startOff + 1;
   const w = Math.max(months * PX_PER_MONTH, 28);
   const x = L_PAD + (TOTAL_DISP - endOff - 1) * PX_PER_MONTH;
@@ -189,15 +211,14 @@ const CATEGORIES: Category[] = ["experience", "school", "volunteering"];
 type LanedItem = TItem & { lane: number };
 
 function assignLanes(its: TItem[]): LanedItem[] {
-  const sorted = [...its].sort(
-    (a, b) => (a.start[0] * 12 + a.start[1]) - (b.start[0] * 12 + b.start[1])
-  );
+  const sorted = [...its].sort((a, b) => monthOffset(a.start) - monthOffset(b.start));
   const laneEnds: number[] = [];
   return sorted.map((item) => {
-    const s = (item.start[0] - START_YEAR) * 12 + item.start[1];
-    const e = (item.end[0]   - START_YEAR) * 12 + item.end[1];
+    const s = monthOffset(item.start);
+    const e = monthOffset(item.end);
     let lane = 0;
-    while (lane < laneEnds.length && laneEnds[lane] > s) lane++;
+    // End months are inclusive, so a bar ending in the month another starts still overlaps it
+    while (lane < laneEnds.length && laneEnds[lane] >= s) lane++;
     laneEnds[lane] = e;
     return { ...item, lane };
   });
@@ -254,6 +275,7 @@ function Bar({
           style={{
             height: 16, width: "auto", maxWidth: 44, flexShrink: 0,
             borderRadius: 2, objectFit: "contain", opacity: 0.9,
+            ...(item.logoOnLight && { background: "#e5e5e5", padding: "1px 3px" }),
           }}
         />
       )}
@@ -274,14 +296,14 @@ function Bar({
 
 function YearAxis() {
   return (
-    <div style={{ display: "flex", height: 44, flexShrink: 0 }}>
+    <div style={{ display: "flex", height: AXIS_H, flexShrink: 0 }}>
       {/* Sticky spacer */}
       <div style={{
         position: "sticky", left: 0, zIndex: 6, width: LABEL_W, flexShrink: 0,
         background: "#0a0a0a", borderRight: "1px solid #222",
       }} />
       {/* Axis track */}
-      <div style={{ position: "relative", width: CONTENT_W, flexShrink: 0, height: 44, overflow: "visible" }}>
+      <div style={{ position: "relative", width: CONTENT_W, flexShrink: 0, height: AXIS_H, overflow: "visible" }}>
         {/* Year tick lines — extend visually downward via a very tall height */}
         {YEARS.map((year) => (
           <div key={year} style={{
@@ -298,10 +320,11 @@ function YearAxis() {
           background: "rgba(249,115,22,0.4)",
           zIndex: 3, pointerEvents: "none",
         }} />
-        {/* Year labels */}
+        {/* Year labels — each sits just left of its January line, i.e. inside that year */}
         {YEARS.map((year) => (
           <span key={year} style={{
-            position: "absolute", left: rX(year, 0) + 6, top: 14,
+            position: "absolute", left: rX(year, 0) - 6, top: 10,
+            transform: "translateX(-100%)",
             fontSize: 11, fontFamily: "var(--font-mono)",
             color: "#585858", userSelect: "none",
           }}>
@@ -333,20 +356,19 @@ function SectionRow({
   onSelect: (item: TItem) => void;
   onDismiss: () => void;
 }) {
-  const color   = COLORS[category];
-  const maxLane = laned.reduce((m, i) => Math.max(m, i.lane), 0);
-  const laneCount    = maxLane + 1;
-  const contentMinH  = laneCount * (BAR_H + BAR_GAP) - BAR_GAP + SECTION_V_PAD * 2;
+  const color    = COLORS[category];
+  const maxLane  = laned.reduce((m, i) => Math.max(m, i.lane), 0);
+  const laneCount = maxLane + 1;
+  const rowH      = laneCount * (BAR_H + BAR_GAP) - BAR_GAP + SECTION_V_PAD * 2;
 
   return (
-    <div style={{ display: "flex", flex: laneCount, minHeight: contentMinH }}>
+    <div style={{ display: "flex", height: rowH }}>
       {/* Sticky label */}
       <div style={{
         position: "sticky", left: 0, zIndex: 5, width: LABEL_W, flexShrink: 0,
         background: "#0a0a0a", borderRight: "1px solid #222", borderTop: "1px solid #1e1e1e",
         display: "flex", alignItems: "flex-start",
-        paddingTop: SECTION_V_PAD + 2, paddingLeft: 16, paddingRight: 12,
-        height: "100%",
+        paddingTop: SECTION_V_PAD + 7, paddingLeft: 16, paddingRight: 12,
       }}>
         <span style={{
           fontSize: 10, fontFamily: "var(--font-mono)",
@@ -364,8 +386,6 @@ function SectionRow({
           position: "relative",
           width: CONTENT_W,
           flexShrink: 0,
-          height: "100%",
-          minHeight: contentMinH,
           borderTop: "1px solid #1e1e1e",
         }}
       >
@@ -401,17 +421,12 @@ function DetailCard({ item, onClose }: { item: TItem; onClose: () => void }) {
       transition={{ duration: 0.2, ease: "easeOut" }}
       onClick={(e) => e.stopPropagation()}
       style={{
-        position: "absolute",
-        bottom: 24,
-        left: "50%",
-        transform: "translateX(-50%)",
-        width: 360,
-        maxWidth: "calc(100vw - 40px)",
+        width: 400,
+        maxWidth: "100%",
         background: "#111111",
         border: "1px solid #2a2a2a",
         borderRadius: 8,
         padding: "14px 16px",
-        zIndex: 15,
       }}
     >
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12 }}>
@@ -419,7 +434,7 @@ function DetailCard({ item, onClose }: { item: TItem; onClose: () => void }) {
           {item.logo && (
             <div style={{
               flexShrink: 0,
-              background: "rgba(255,255,255,0.07)",
+              background: item.logoOnLight ? "#e5e5e5" : "rgba(255,255,255,0.07)",
               borderRadius: 8,
               padding: "6px 8px",
               display: "flex", alignItems: "center", justifyContent: "center",
@@ -505,12 +520,16 @@ export function AboutSection() {
     return () => el.removeEventListener("wheel", handler);
   }, [timelineOpen]);
 
-  // Escape key + reset state on open
-  useEffect(() => {
-    if (!timelineOpen) return;
+  function openTimeline() {
     setShowScrollHint(true);
     setSelected(null);
     hasScrolled.current = false;
+    setTimelineOpen(true);
+  }
+
+  // Escape key closes the overlay
+  useEffect(() => {
+    if (!timelineOpen) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setTimelineOpen(false);
     };
@@ -520,7 +539,7 @@ export function AboutSection() {
 
   // Stagger: items closest to present animate first
   function itemDelay(item: LanedItem, idx: number): number {
-    const endOff = (item.end[0] - START_YEAR) * 12 + item.end[1];
+    const endOff = Math.min(monthOffset(item.end), TODAY_OFFSET);
     return 0.08 + (1 - endOff / TODAY_OFFSET) * 0.3 + idx * 0.015;
   }
 
@@ -551,7 +570,7 @@ export function AboutSection() {
         </div>
 
         <button
-          onClick={() => setTimelineOpen(true)}
+          onClick={openTimeline}
           className="mt-6 flex items-center gap-1.5 text-sm text-accent hover:text-accent/80 transition-colors cursor-pointer"
         >
           <span>Tell me more about yourself</span>
@@ -571,7 +590,7 @@ export function AboutSection() {
             style={{
               position: "fixed", inset: 0, zIndex: 50,
               background: "#0a0a0a", overflow: "hidden",
-              display: "flex", flexDirection: "column",
+              display: "flex", flexDirection: "column", justifyContent: "center",
               height: "100dvh",
             }}
           >
@@ -586,69 +605,55 @@ export function AboutSection() {
               ← back
             </motion.button>
 
-            {/* Horizontal scroll container — stretches to fill overlay height */}
+            {/* Horizontal scroll container — as tall as its content, centered in the overlay */}
             <div
               ref={scrollRef}
               style={{
-                flex: 1,
-                overflowX: "auto",
-                overflowY: "hidden",
-                display: "flex",
-                alignItems: "stretch",
+                overflowX: "auto", overflowY: "hidden", flexShrink: 0,
+                scrollbarWidth: "thin", scrollbarColor: "#333 transparent",
               }}
             >
-              {/* Timeline column — fills scroll container height */}
-              <div style={{
-                display: "flex",
-                flexDirection: "column",
-                flexShrink: 0,
-                height: "100%",
-                paddingTop: 48,
-              }}>
+              <div style={{ width: LABEL_W + CONTENT_W, display: "flex", flexDirection: "column" }}>
                 <YearAxis />
-
-                {/* Sections — fill remaining height proportionally */}
-                <div style={{ flex: 1, display: "flex", flexDirection: "column", minHeight: 0 }}>
-                  {CATEGORIES.map((cat) => (
-                    <SectionRow
-                      key={cat}
-                      category={cat}
-                      laned={categorized[cat]}
-                      itemDelay={itemDelay}
-                      selected={selected}
-                      onSelect={(item) => setSelected((prev) => prev?.id === item.id ? null : item)}
-                      onDismiss={() => setSelected(null)}
-                    />
-                  ))}
-                </div>
+                {CATEGORIES.map((cat) => (
+                  <SectionRow
+                    key={cat}
+                    category={cat}
+                    laned={categorized[cat]}
+                    itemDelay={itemDelay}
+                    selected={selected}
+                    onSelect={(item) => setSelected((prev) => prev?.id === item.id ? null : item)}
+                    onDismiss={() => setSelected(null)}
+                  />
+                ))}
               </div>
             </div>
 
-            {/* Detail card */}
-            <AnimatePresence>
-              {selected && (
-                <DetailCard
-                  key={selected.id}
-                  item={selected}
-                  onClose={() => setSelected(null)}
-                />
-              )}
-            </AnimatePresence>
-
-            {/* Scroll hint */}
-            <AnimatePresence>
-              {showScrollHint && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5, delay: 0.5 }}
-                  className="absolute bottom-7 right-8 text-xs font-mono text-muted-foreground/35 pointer-events-none"
-                >
-                  scroll → past
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {/* Detail slot — fixed height so the timeline doesn't jump when a card opens */}
+            <div style={{
+              height: 200, flexShrink: 0, padding: "20px 20px 0",
+              display: "flex", justifyContent: "center", alignItems: "flex-start",
+            }}>
+              <AnimatePresence mode="wait">
+                {selected ? (
+                  <DetailCard
+                    key={selected.id}
+                    item={selected}
+                    onClose={() => setSelected(null)}
+                  />
+                ) : (
+                  <motion.p
+                    key="hint"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1, transition: { duration: 0.3, delay: 0.3 } }}
+                    exit={{ opacity: 0, transition: { duration: 0.1 } }}
+                    className="text-xs font-mono text-muted-foreground/50 pointer-events-none"
+                  >
+                    click a bar for details{showScrollHint && " · scroll → past"}
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
