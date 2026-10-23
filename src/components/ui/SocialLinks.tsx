@@ -1,5 +1,6 @@
 import { Github, Linkedin } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { SOCIAL_URLS } from "@/lib/site";
 
 interface SocialLinksProps {
   className?: string;
@@ -22,17 +23,17 @@ function XIcon({ className }: { className?: string }) {
 const socialLinks = [
   {
     name: "GitHub",
-    href: "https://github.com/hanski-t",
+    href: SOCIAL_URLS.github,
     icon: Github,
   },
   {
     name: "LinkedIn",
-    href: "https://www.linkedin.com/in/hannes-tayronen/",
+    href: SOCIAL_URLS.linkedin,
     icon: Linkedin,
   },
   {
     name: "X",
-    href: "https://x.com/Hannes_Tayronen",
+    href: SOCIAL_URLS.x,
     icon: XIcon,
   },
 ];

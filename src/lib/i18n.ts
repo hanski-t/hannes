@@ -48,6 +48,7 @@ export const dictionary = {
     },
     lastUpdated: "last updated · Oct 2026",
     think: "Think",
+    thinkDescription: "Thoughts on building, life, and everything in between.",
     thinkQuote:
       "Welcome to my corner of the internet. This is where I'll share thoughts on building, life, and everything in between.",
     moreThoughts: "What else is on your mind?",
@@ -77,6 +78,7 @@ export const dictionary = {
     },
     lastUpdated: "päivitetty lokakuussa 2026",
     think: "Ajatuksia",
+    thinkDescription: "Ajatuksia tekemisestä, elämästä ja kaikesta siltä väliltä.",
     thinkQuote:
       "Tervetuloa omaan nurkkaukseeni internetissä. Täällä jaan ajatuksia tekemisestä, elämästä ja kaikesta siltä väliltä.",
     moreThoughts: "Mitä muuta mielessä?",

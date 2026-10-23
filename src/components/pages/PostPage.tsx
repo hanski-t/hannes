@@ -5,8 +5,11 @@ import Link from "next/link";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Container } from "@/components/layout";
-import { getPost, getPostSlugs } from "@/lib/mdx";
+import { JsonLd } from "@/components/JsonLd";
+import { getPost, getPostLanguages, getPostSlugs } from "@/lib/mdx";
 import { Lang, dictionary, formatDate, localePath } from "@/lib/i18n";
+import { pageMetadata } from "@/lib/seo";
+import { SITE_NAME, SITE_URL, absoluteUrl } from "@/lib/site";
 import { mdxComponents } from "../../../mdx-components";
 
 export function postStaticParams() {
@@ -17,15 +20,19 @@ export function postMetadata(lang: Lang, slug: string): Metadata {
   const post = getPost(slug, lang);
   if (!post) return { title: dictionary[lang].postNotFound };
 
-  const { title, description, image } = post.frontmatter;
-  return {
+  const { title, description, image, date } = post.frontmatter;
+  // A post with only one language version shows up under both languages' URLs;
+  // contentLang points search engines at the URL of the language it's written in
+  return pageMetadata({
+    lang,
+    path: `/think/${slug}`,
     title,
     description,
-    // A post with only one language version shows up under both languages' URLs,
-    // so point search engines at the URL of the language it's written in
-    alternates: { canonical: localePath(post.lang, `/think/${slug}`) },
-    openGraph: { title, description, type: "article", images: image ? [image] : undefined },
-  };
+    languages: getPostLanguages(slug),
+    contentLang: post.lang,
+    image,
+    publishedTime: date,
+  });
 }
 
 export function PostPage({ lang, slug }: { lang: Lang; slug: string }) {
@@ -38,9 +45,24 @@ export function PostPage({ lang, slug }: { lang: Lang; slug: string }) {
 
   const { frontmatter } = post;
   const backHref = localePath(lang, "/think");
+  const url = absoluteUrl(localePath(post.lang, `/think/${slug}`));
 
   return (
     <div lang={lang}>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: frontmatter.title,
+          description: frontmatter.description,
+          datePublished: frontmatter.date,
+          inLanguage: post.lang,
+          url,
+          mainEntityOfPage: url,
+          image: frontmatter.image ? absoluteUrl(frontmatter.image) : undefined,
+          author: { "@type": "Person", name: SITE_NAME, url: SITE_URL },
+        }}
+      />
       <Container size="narrow" className="py-16">
         <Link
           href={backHref}

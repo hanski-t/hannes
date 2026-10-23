@@ -36,6 +36,11 @@ function readPost(slug: string, lang: Lang): Post | null {
   };
 }
 
+// Languages a post has a published version in
+export function getPostLanguages(slug: string): Lang[] {
+  return (["en", "fi"] as const).filter((lang) => readPost(slug, lang)?.frontmatter.published);
+}
+
 // The post in the requested language, or in the other one if that's the only version
 export function getPost(slug: string, lang: Lang): Post | null {
   return readPost(slug, lang) ?? readPost(slug, otherLang(lang));
