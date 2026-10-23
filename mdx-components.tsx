@@ -1,5 +1,15 @@
 import type { MDXComponents } from "mdx/types";
+import Image from "next/image";
 import Link from "next/link";
+
+// Props are strings because posts can't contain JavaScript expressions
+interface FigureProps {
+  src: string;
+  alt: string;
+  width: string;
+  height: string;
+  caption?: string;
+}
 
 // Plain object so server components (like the post page) can use it directly
 export const mdxComponents: MDXComponents = {
@@ -98,6 +108,26 @@ export const mdxComponents: MDXComponents = {
       alt={alt ?? ""}
       className="my-6 rounded-lg"
     />
+  ),
+
+  // Picture with a caption, used in posts as:
+  // <Figure src="/posts/..." alt="..." width="1348" height="1000" caption="..." />
+  Figure: ({ src, alt, width, height, caption }: FigureProps) => (
+    <figure className="my-8">
+      <Image
+        src={src}
+        alt={alt}
+        width={Number(width)}
+        height={Number(height)}
+        sizes="(min-width: 768px) 720px, 100vw"
+        className="h-auto w-full rounded-lg border border-border"
+      />
+      {caption && (
+        <figcaption className="mt-3 text-center text-sm text-muted-foreground">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
   ),
 };
 
