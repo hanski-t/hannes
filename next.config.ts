@@ -14,6 +14,10 @@ const nextConfig: NextConfig = {
         destination: "https://game.hannestayronen.com",
         permanent: false,
       },
+      // Pages from the old multi-page version of the site
+      { source: "/about", destination: "/", permanent: false },
+      { source: "/life", destination: "/", permanent: false },
+      { source: "/build/:path*", destination: "/", permanent: false },
     ];
   },
 };
