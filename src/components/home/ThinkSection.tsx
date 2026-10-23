@@ -10,7 +10,8 @@ interface ThinkSectionProps {
   posts: Post[];
 }
 
-const PREVIEW_COUNT = 2;
+// Home shows the newest posts; the link to /think appears once there are more than this
+const PREVIEW_COUNT = 5;
 
 export function ThinkSection({ lang, posts }: ThinkSectionProps) {
   if (posts.length === 0) return null;
