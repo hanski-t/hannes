@@ -65,9 +65,9 @@ export const dictionary = {
   // Finnish is written to sound natural, not translated word for word
   fi: {
     siteDescription:
-      "Tekijä, yrittäjä ja seikkailija. Kokeilen, teen ja välillä epäonnistun, koska tekemällä oppii parhaiten.",
+      "Tekijä, yrittäjä ja seikkailija. Kokeilen, teen ja välillä epäonnistun. Selvitän loput matkan varrella.",
     tags: ["tekijä", "yrittäjä", "seikkailija"],
-    tagline: ["Kokeilen, teen ja välillä epäonnistun.", "Tekemällä oppii parhaiten."],
+    tagline: ["Kokeilen, teen ja välillä epäonnistun.", "Selvitän loput matkan varrella."],
     currently: {
       label: "parhaillaan",
       items: ["reissaan Kaakkois-Aasiassa", "kehittelen omia projekteja", "mietin, mitä seuraavaksi..."],
