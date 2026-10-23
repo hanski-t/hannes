@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Lang, dictionary } from "@/lib/i18n";
 
@@ -20,14 +21,14 @@ export function AboutSection({ lang }: { lang: Lang }) {
       {lang === "fi" ? (
         <div className="space-y-3 text-muted-foreground">
           <p>
-            Olen Hannes, suomalainen <Highlight>rakentaja</Highlight>,{" "}
-            <Highlight>startup-yrittäjä</Highlight> ja <Highlight>seikkailija</Highlight>.
-            Haluan luoda asioita, jotka tekevät maailmasta vähän paremman paikan.
+            Olen Hannes, <Highlight>rakentelija</Highlight>, <Highlight>startup-yrittäjä</Highlight> ja{" "}
+            <Highlight>seikkailija</Highlight> Suomesta. Tykkään luoda asioita, jotka tekevät maailmasta
+            vähän paremman.
           </p>
           <p>
-            Matkani on kulkenut startupien, sivuprojektien ja maailmalla seikkailun kautta. Uskon{" "}
-            <Highlight>tekemällä oppimiseen</Highlight>, uteliaisuuteen ja siihen, että uuden
-            rakentamisen kaaos kuuluu asiaan.
+            Matkan varrelle on mahtunut startuppeja, sivuprojekteja ja seikkailuja ympäri maailmaa. Uskon{" "}
+            <Highlight>tekemällä oppimiseen</Highlight>, uteliaisuuteen ja siihen, että uuden rakentamiseen
+            kuuluu aina vähän kaaosta.
           </p>
         </div>
       ) : (
@@ -44,6 +45,15 @@ export function AboutSection({ lang }: { lang: Lang }) {
           </p>
         </div>
       )}
+
+      <Image
+        src="/about/hiking.jpg"
+        alt={lang === "fi" ? "Vaelluksella näköalapaikalla vuorten yllä" : "Hiking at a lookout high above the hills"}
+        width={1000}
+        height={1000}
+        sizes="320px"
+        className="mt-8 h-auto w-full max-w-xs rounded-lg"
+      />
     </motion.section>
   );
 }

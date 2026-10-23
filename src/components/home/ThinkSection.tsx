@@ -27,14 +27,9 @@ export function ThinkSection({ lang, posts }: ThinkSectionProps) {
     >
       <h2 className="text-sm font-mono text-muted-foreground mb-6">{t.think}</h2>
 
-      {posts[0]?.frontmatter.description && (
-        <blockquote
-          lang={posts[0].lang}
-          className="mb-6 border-l-2 border-accent pl-4 text-lg text-foreground leading-snug"
-        >
-          {posts[0].frontmatter.description}
-        </blockquote>
-      )}
+      <blockquote className="mb-6 border-l-2 border-accent pl-4 text-lg text-foreground leading-snug">
+        {t.thinkQuote}
+      </blockquote>
 
       <div className="space-y-3">
         {preview.map((post) => (
