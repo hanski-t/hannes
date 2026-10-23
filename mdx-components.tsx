@@ -1,6 +1,6 @@
 import type { MDXComponents } from "mdx/types";
-import Image from "next/image";
 import Link from "next/link";
+import { ZoomableImage } from "@/components/ZoomableImage";
 
 // Props are strings because posts can't contain JavaScript expressions
 interface FigureProps {
@@ -100,33 +100,25 @@ export const mdxComponents: MDXComponents = {
   // Horizontal rule
   hr: () => <hr className="my-8 border-border" />,
 
-  // Images in the post text open full size in a new tab when clicked
+  // Images in the post text open as a full-size preview on top of the page when clicked
   img: ({ src, alt }) => (
-    <a href={src} target="_blank" rel="noopener noreferrer" className="block cursor-zoom-in">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={src}
-        alt={alt ?? ""}
-        className="my-6 rounded-lg"
-      />
-    </a>
+    <span className="my-6 block">
+      <ZoomableImage src={String(src)} alt={alt ?? ""} className="rounded-lg" />
+    </span>
   ),
 
   // Picture with a caption, used in posts as:
   // <Figure src="/posts/..." alt="..." width="1348" height="1000" caption="..." />
-  // Clicking it opens the original file in a new tab.
+  // Clicking it opens a full-size preview on top of the page.
   Figure: ({ src, alt, width, height, caption }: FigureProps) => (
     <figure className="my-8">
-      <a href={src} target="_blank" rel="noopener noreferrer" className="block cursor-zoom-in">
-        <Image
-          src={src}
-          alt={alt}
-          width={Number(width)}
-          height={Number(height)}
-          sizes="(min-width: 768px) 720px, 100vw"
-          className="h-auto w-full rounded-lg border border-border transition-opacity hover:opacity-90"
-        />
-      </a>
+      <ZoomableImage
+        src={src}
+        alt={alt}
+        width={Number(width)}
+        height={Number(height)}
+        className="h-auto w-full rounded-lg border border-border transition-opacity hover:opacity-90"
+      />
       {caption && (
         <figcaption className="mt-3 text-center text-sm text-muted-foreground">
           {caption}
