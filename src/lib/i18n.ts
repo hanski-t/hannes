@@ -69,7 +69,7 @@ export const dictionary = {
     tagline: ["Kokeilen, teen ja välillä epäonnistun.", "Tekemällä oppii parhaiten."],
     currently: {
       label: "parhaillaan",
-      items: ["reissaan Kaakkois-Aasiassa", "teen omia projekteja", "mietin, mitä seuraavaksi..."],
+      items: ["reissaan Kaakkois-Aasiassa", "kehittelen omia projekteja", "mietin, mitä seuraavaksi..."],
     },
     interests: {
       label: "kiinnostuksen kohteet",
@@ -78,7 +78,7 @@ export const dictionary = {
     lastUpdated: "päivitetty lokakuussa 2026",
     think: "Ajatuksia",
     thinkQuote:
-      "Tervetuloa omaan nurkkaukseeni internetissä. Täällä jaan ajatuksia rakentamisesta, elämästä ja kaikesta siltä väliltä.",
+      "Tervetuloa omaan nurkkaukseeni internetissä. Täällä jaan ajatuksia tekemisestä, elämästä ja kaikesta siltä väliltä.",
     moreThoughts: "Mitä muuta mielessä?",
     about: "Minusta",
     home: "Etusivu",
