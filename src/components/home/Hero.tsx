@@ -2,8 +2,37 @@
 
 import { motion } from "framer-motion";
 import { SocialLinks } from "../ui/SocialLinks";
+import { Lang, dictionary } from "@/lib/i18n";
 
-export function Hero() {
+const asciiStyle = {
+  fontFamily: "'Courier New', Courier, monospace",
+  fontSize: "9px",
+  lineHeight: 1.15,
+  margin: 0,
+  whiteSpace: "pre",
+  letterSpacing: 0,
+} as const;
+
+// ANSI Shadow lettering. The two rows above TÄYRÖNEN are the umlaut dots over Ä and Ö.
+const ASCII_FIRST = `██╗  ██╗ █████╗ ███╗   ██╗███╗   ██╗███████╗███████╗
+██║  ██║██╔══██╗████╗  ██║████╗  ██║██╔════╝██╔════╝
+███████║███████║██╔██╗ ██║██╔██╗ ██║█████╗  ███████╗
+██╔══██║██╔══██║██║╚██╗██║██║╚██╗██║██╔══╝  ╚════██║
+██║  ██║██║  ██║██║ ╚████║██║ ╚████║███████╗███████║
+╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚══════╝`;
+
+const ASCII_LAST = `          ██╗ ██╗                  ██╗ ██╗
+          ╚═╝ ╚═╝                  ╚═╝ ╚═╝
+████████╗ █████╗ ██╗   ██╗██████╗  ██████╗ ███╗   ██╗███████╗███╗   ██╗
+╚══██╔══╝██╔══██╗╚██╗ ██╔╝██╔══██╗██╔═══██╗████╗  ██║██╔════╝████╗  ██║
+   ██║   ███████║ ╚████╔╝ ██████╔╝██║   ██║██╔██╗ ██║█████╗  ██╔██╗ ██║
+   ██║   ██╔══██║  ╚██╔╝  ██╔══██╗██║   ██║██║╚██╗██║██╔══╝  ██║╚██╗██║
+   ██║   ██║  ██║   ██║   ██║  ██║╚██████╔╝██║ ╚████║███████╗██║ ╚████║
+   ╚═╝   ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═══╝`;
+
+export function Hero({ lang }: { lang: Lang }) {
+  const t = dictionary[lang];
+
   return (
     <motion.section
       initial={{ opacity: 0, y: 20 }}
@@ -16,40 +45,16 @@ export function Hero() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.15 }}
-        className="name-glow overflow-x-auto"
+        className="name-glow"
         aria-label="Hannes Täyrönen"
       >
-        <div className="flex flex-col md:flex-row md:items-end md:gap-6" aria-hidden="true">
-          <pre style={{
-            fontFamily: "'Courier New', Courier, monospace",
-            fontSize: "9px",
-            lineHeight: 1.15,
-            color: "#fafafa",
-            textShadow: "0 0 20px rgba(249,115,22,0.7), 0 0 50px rgba(249,115,22,0.25)",
-            margin: 0,
-            whiteSpace: "pre",
-            letterSpacing: 0,
-          }}>{`██╗  ██╗ █████╗ ███╗   ██╗███╗   ██╗███████╗███████╗
-██║  ██║██╔══██╗████╗  ██║████╗  ██║██╔════╝██╔════╝
-███████║███████║██╔██╗ ██║██╔██╗ ██║█████╗  ███████╗
-██╔══██║██╔══██║██║╚██╗██║██║╚██╗██║██╔══╝  ╚════██║
-██║  ██║██║  ██║██║ ╚████║██║ ╚████║███████╗███████║
-╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚══════╝`}</pre>
-          <pre style={{
-            fontFamily: "'Courier New', Courier, monospace",
-            fontSize: "9px",
-            lineHeight: 1.15,
-            color: "#fafafa",
-            textShadow: "0 0 20px rgba(249,115,22,0.7), 0 0 50px rgba(249,115,22,0.25)",
-            margin: 0,
-            whiteSpace: "pre",
-            letterSpacing: 0,
-          }}>{`████████╗ █████╗ ██╗   ██╗██████╗  ██████╗ ███╗   ██╗███████╗███╗   ██╗
-╚══██╔══╝██╔══██╗╚██╗ ██╔╝██╔══██╗██╔═══██╗████╗  ██║██╔════╝████╗  ██║
-   ██║   ███████║ ╚████╔╝ ██████╔╝██║   ██║██╔██╗ ██║█████╗  ██╔██╗ ██║
-   ██║   ██╔══██║  ╚██╔╝  ██╔══██╗██║   ██║██║╚██╗██║██╔══╝  ██║╚██╗██║
-   ██║   ██║  ██║   ██║   ██║  ██║╚██████╔╝██║ ╚████║███████╗██║ ╚████║
-   ╚═╝   ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═══╝`}</pre>
+        {/* Phones: plain text, the ASCII art is too wide */}
+        <span className="ascii-name font-mono text-3xl font-bold tracking-tight sm:hidden">
+          Hannes Täyrönen
+        </span>
+        <div className="hidden sm:flex flex-col md:flex-row md:items-end md:gap-6" aria-hidden="true">
+          <pre className="ascii-name" style={asciiStyle}>{ASCII_FIRST}</pre>
+          <pre className="ascii-name" style={asciiStyle}>{ASCII_LAST}</pre>
         </div>
       </motion.h1>
 
@@ -60,7 +65,7 @@ export function Hero() {
         transition={{ duration: 0.45, delay: 0.25 }}
         className="mt-4 flex items-center gap-5"
       >
-        {["builder", "founder", "explorer"].map((tag) => (
+        {t.tags.map((tag) => (
           <span key={tag} className="font-mono text-sm text-muted-foreground">
             [{tag}]
           </span>
@@ -75,9 +80,9 @@ export function Hero() {
         className="mt-6 max-w-lg"
       >
         <p className="text-lg text-muted-foreground leading-relaxed">
-          Building things, breaking things.
+          {t.tagline[0]}
           <br />
-          Figuring it out as I go.
+          {t.tagline[1]}
         </p>
       </motion.div>
 

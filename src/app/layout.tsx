@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { ThemeProvider } from "next-themes";
 import "./globals.css";
-import { FooterWrapper } from "@/components/layout/FooterWrapper";
+import { Footer } from "@/components/layout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,13 +47,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    // suppressHydrationWarning: next-themes sets the theme class on <html> before React loads
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
         suppressHydrationWarning
       >
-        <main className="flex-1 relative z-[1]">{children}</main>
-        <FooterWrapper />
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
+          <main className="flex-1 relative z-[1]">{children}</main>
+          <Footer />
+        </ThemeProvider>
         <Analytics />
       </body>
     </html>

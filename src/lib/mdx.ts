@@ -3,50 +3,51 @@ import path from "path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 import { Post, PostFrontmatter } from "@/types/post";
+import { Lang, otherLang } from "@/lib/i18n";
 
+// Posts are named <slug>.<lang>.mdx, e.g. hello-world.en.mdx. A post can have
+// an English version, a Finnish version, or both. Both share the same slug (URL).
 const postsDirectory = path.join(process.cwd(), "content/posts");
+const POST_FILE = /^(.+)\.(en|fi)\.mdx$/;
 
 export function getPostSlugs(): string[] {
-  // Create directory if it doesn't exist
-  if (!fs.existsSync(postsDirectory)) {
-    fs.mkdirSync(postsDirectory, { recursive: true });
-    return [];
-  }
+  if (!fs.existsSync(postsDirectory)) return [];
 
-  return fs
+  const slugs = fs
     .readdirSync(postsDirectory)
-    .filter((file) => file.endsWith(".mdx"))
-    .map((file) => file.replace(/\.mdx$/, ""));
+    .map((file) => file.match(POST_FILE)?.[1])
+    .filter((slug): slug is string => !!slug);
+
+  return [...new Set(slugs)];
 }
 
-export function getPostBySlug(slug: string): Post & { readingTime: string } {
-  const fullPath = path.join(postsDirectory, `${slug}.mdx`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
-  const { data, content } = matter(fileContents);
+function readPost(slug: string, lang: Lang): Post | null {
+  const fullPath = path.join(postsDirectory, `${slug}.${lang}.mdx`);
+  if (!fs.existsSync(fullPath)) return null;
+
+  const { data, content } = matter(fs.readFileSync(fullPath, "utf8"));
 
   return {
     slug,
+    lang,
     frontmatter: data as PostFrontmatter,
     content,
-    readingTime: readingTime(content).text,
+    readingMinutes: Math.max(1, Math.round(readingTime(content).minutes)),
   };
 }
 
-export function getAllPosts(): (Post & { readingTime: string })[] {
-  const slugs = getPostSlugs();
+// The post in the requested language, or in the other one if that's the only version
+export function getPost(slug: string, lang: Lang): Post | null {
+  return readPost(slug, lang) ?? readPost(slug, otherLang(lang));
+}
 
-  if (slugs.length === 0) {
-    return [];
-  }
-
-  const posts = slugs
-    .map((slug) => getPostBySlug(slug))
-    .filter((post) => post.frontmatter.published)
+export function getAllPosts(lang: Lang): Post[] {
+  return getPostSlugs()
+    .map((slug) => getPost(slug, lang))
+    .filter((post): post is Post => !!post && post.frontmatter.published)
     .sort(
       (a, b) =>
         new Date(b.frontmatter.date).getTime() -
         new Date(a.frontmatter.date).getTime()
     );
-
-  return posts;
 }

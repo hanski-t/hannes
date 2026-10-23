@@ -1,25 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Lang, dictionary } from "@/lib/i18n";
 
-// Update these items (and the date) whenever things change
-const lastUpdated = "Oct 2026";
-const groups = [
-  {
-    label: "currently",
-    items: [
-      "exploring Southeast Asia",
-      "building stuff",
-      "looking for what to do next...",
-    ],
-  },
-  {
-    label: "interested in",
-    items: ["ai · energy · hard tech · health & longevity"],
-  },
-];
+// The items (and the date) live in src/lib/i18n.ts, update them there whenever things change
+export function Currently({ lang }: { lang: Lang }) {
+  const t = dictionary[lang];
+  const groups = [t.currently, t.interests];
 
-export function Currently() {
   return (
     <motion.section
       initial={{ opacity: 0, y: 20 }}
@@ -45,7 +33,7 @@ export function Currently() {
           </div>
         ))}
         <div className="pl-4 text-muted-foreground/40 pt-1">
-          last updated · {lastUpdated}{" "}
+          {t.lastUpdated}{" "}
           <span className="cursor-blink">_</span>
         </div>
       </div>
