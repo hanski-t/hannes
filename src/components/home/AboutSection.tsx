@@ -21,13 +21,13 @@ export function AboutSection({ lang }: { lang: Lang }) {
       {lang === "fi" ? (
         <div className="space-y-3 text-muted-foreground">
           <p>
-            Olen Hannes, <Highlight>rakentelija</Highlight>, <Highlight>startup-yrittäjä</Highlight> ja{" "}
+            Olen Hannes, <Highlight>tekijä</Highlight>, <Highlight>startup-yrittäjä</Highlight> ja{" "}
             <Highlight>seikkailija</Highlight> Suomesta. Tykkään luoda asioita, jotka tekevät maailmasta
             vähän paremman.
           </p>
           <p>
             Matkan varrelle on mahtunut startuppeja, sivuprojekteja ja seikkailuja ympäri maailmaa. Uskon{" "}
-            <Highlight>tekemällä oppimiseen</Highlight>, uteliaisuuteen ja siihen, että uuden rakentamiseen
+            <Highlight>tekemällä oppimiseen</Highlight>, uteliaisuuteen ja siihen, että uuden luomiseen
             kuuluu aina vähän kaaosta.
           </p>
         </div>

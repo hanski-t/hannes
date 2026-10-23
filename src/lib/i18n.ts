@@ -64,15 +64,15 @@ export const dictionary = {
   // Finnish is written to sound natural, not translated word for word
   fi: {
     siteDescription:
-      "Rakentelija, yrittäjä ja seikkailija. Rakentelen ja rikon juttuja ja opin matkan varrella.",
-    tags: ["rakentelija", "yrittäjä", "seikkailija"],
-    tagline: ["Rakentelen ja rikon juttuja.", "Opin matkan varrella."],
+      "Tekijä, yrittäjä ja seikkailija. Kokeilen, teen ja välillä epäonnistun, koska tekemällä oppii parhaiten.",
+    tags: ["tekijä", "yrittäjä", "seikkailija"],
+    tagline: ["Kokeilen, teen ja välillä epäonnistun.", "Tekemällä oppii parhaiten."],
     currently: {
-      label: "nyt",
-      items: ["reissaan Kaakkois-Aasiassa", "rakentelen juttuja", "mietin, mitä seuraavaksi..."],
+      label: "parhaillaan",
+      items: ["reissaan Kaakkois-Aasiassa", "teen omia projekteja", "mietin, mitä seuraavaksi..."],
     },
     interests: {
-      label: "kiinnostaa",
+      label: "kiinnostuksen kohteet",
       items: ["tekoäly · energia · hard tech · terveys ja pitkäikäisyys"],
     },
     lastUpdated: "päivitetty lokakuussa 2026",
