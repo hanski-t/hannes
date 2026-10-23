@@ -19,7 +19,7 @@ export function AboutSection({ lang }: { lang: Lang }) {
       <h2 className="text-sm font-mono text-muted-foreground mb-6">{dictionary[lang].about}</h2>
 
       {lang === "fi" ? (
-        <div className="space-y-3 text-muted-foreground">
+        <div className="space-y-3 text-muted-foreground text-pretty">
           <p>
             Olen Hannes, <Highlight>tekijä</Highlight>, <Highlight>startup-yrittäjä</Highlight> ja{" "}
             <Highlight>seikkailija</Highlight> Suomesta. Tykkään luoda asioita, jotka tekevät maailmasta
@@ -32,7 +32,7 @@ export function AboutSection({ lang }: { lang: Lang }) {
           </p>
         </div>
       ) : (
-        <div className="space-y-3 text-muted-foreground">
+        <div className="space-y-3 text-muted-foreground text-pretty">
           <p>
             I&apos;m Hannes — <Highlight>a builder</Highlight>, <Highlight>startup founder</Highlight>, and{" "}
             <Highlight>explorer</Highlight> based in Finland. I&apos;m passionate about creating things that

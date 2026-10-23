@@ -66,7 +66,7 @@ export function PostPage({ lang, slug }: { lang: Lang; slug: string }) {
           </header>
 
           {frontmatter.image && (
-            <figure className="mb-12">
+            <figure className="mb-10">
               <div className="relative aspect-[16/9] overflow-hidden rounded-lg bg-muted">
                 <Image
                   src={frontmatter.image}
@@ -84,6 +84,9 @@ export function PostPage({ lang, slug }: { lang: Lang; slug: string }) {
               )}
             </figure>
           )}
+
+          {/* Small divider between the post header (and cover) and the text */}
+          <div className="mb-10 h-px w-16 bg-accent/60" aria-hidden="true" />
 
           <MDXRemote source={post.content} components={mdxComponents} />
         </article>

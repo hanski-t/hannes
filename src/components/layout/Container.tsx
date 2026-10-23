@@ -17,7 +17,7 @@ export function Container({
         "mx-auto w-full px-6 md:px-8",
         {
           "max-w-3xl": size === "narrow",
-          "max-w-5xl": size === "default",
+          "max-w-6xl": size === "default",
           "max-w-7xl": size === "wide",
         },
         className

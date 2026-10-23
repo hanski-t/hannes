@@ -100,28 +100,33 @@ export const mdxComponents: MDXComponents = {
   // Horizontal rule
   hr: () => <hr className="my-8 border-border" />,
 
-  // Images
+  // Images in the post text open full size in a new tab when clicked
   img: ({ src, alt }) => (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src={src}
-      alt={alt ?? ""}
-      className="my-6 rounded-lg"
-    />
+    <a href={src} target="_blank" rel="noopener noreferrer" className="block cursor-zoom-in">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt={alt ?? ""}
+        className="my-6 rounded-lg"
+      />
+    </a>
   ),
 
   // Picture with a caption, used in posts as:
   // <Figure src="/posts/..." alt="..." width="1348" height="1000" caption="..." />
+  // Clicking it opens the original file in a new tab.
   Figure: ({ src, alt, width, height, caption }: FigureProps) => (
     <figure className="my-8">
-      <Image
-        src={src}
-        alt={alt}
-        width={Number(width)}
-        height={Number(height)}
-        sizes="(min-width: 768px) 720px, 100vw"
-        className="h-auto w-full rounded-lg border border-border"
-      />
+      <a href={src} target="_blank" rel="noopener noreferrer" className="block cursor-zoom-in">
+        <Image
+          src={src}
+          alt={alt}
+          width={Number(width)}
+          height={Number(height)}
+          sizes="(min-width: 768px) 720px, 100vw"
+          className="h-auto w-full rounded-lg border border-border transition-opacity hover:opacity-90"
+        />
+      </a>
       {caption && (
         <figcaption className="mt-3 text-center text-sm text-muted-foreground">
           {caption}
