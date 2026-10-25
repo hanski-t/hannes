@@ -31,7 +31,7 @@ export function GET() {
           Hannes Täyrönen
         </div>
         <div style={{ display: "flex", marginTop: 28, fontSize: 36, color: "#a3a3a3" }}>
-          [builder]  [founder]  [explorer]
+          [builder]  [engineer]  [explorer]
         </div>
         <div style={{ display: "flex", marginTop: 72, width: 80, height: 4, background: "#f97316" }} />
         <div style={{ display: "flex", marginTop: 24, fontSize: 28, color: "#737373" }}>

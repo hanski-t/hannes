@@ -7,7 +7,7 @@ export const DEFAULT_OG_IMAGE = {
   url: "/og.png",
   width: 1200,
   height: 630,
-  alt: "Hannes Täyrönen: builder, founder, explorer",
+  alt: "Hannes Täyrönen: builder, engineer, explorer",
 };
 
 const OG_LOCALE: Record<Lang, string> = { en: "en_US", fi: "fi_FI" };

@@ -35,12 +35,17 @@ export function formatDate(date: string, lang: Lang): string {
 export const dictionary = {
   en: {
     siteDescription:
-      "Builder, startup founder, explorer of the world. Building things, breaking things, figuring it out.",
-    tags: ["builder", "founder", "explorer"],
+      "Builder, engineer, explorer of the world. Building things, breaking things, figuring it out.",
+    tags: ["builder", "engineer", "explorer"],
     tagline: ["Building things, breaking things.", "Figuring it out as I go."],
     currently: {
       label: "currently",
-      items: ["exploring Southeast Asia", "building stuff", "looking for what to do next..."],
+      items: [
+        "exploring Southeast Asia",
+        "building stuff",
+        "looking for what to do next...",
+        "open to new roles from early 2027",
+      ],
     },
     interests: {
       label: "interested in",
@@ -65,12 +70,17 @@ export const dictionary = {
   // Finnish is written to sound natural, not translated word for word
   fi: {
     siteDescription:
-      "Tekijä, yrittäjä ja seikkailija. Kokeilen, teen ja välillä epäonnistun. Selvitän loput matkan varrella.",
-    tags: ["tekijä", "yrittäjä", "seikkailija"],
+      "Tekijä, insinööri ja seikkailija. Kokeilen, teen ja välillä epäonnistun. Selvitän loput matkan varrella.",
+    tags: ["tekijä", "insinööri", "seikkailija"],
     tagline: ["Kokeilen, teen ja välillä epäonnistun.", "Selvitän loput matkan varrella."],
     currently: {
       label: "parhaillaan",
-      items: ["reissaan Kaakkois-Aasiassa", "kehittelen omia projekteja", "mietin, mitä seuraavaksi..."],
+      items: [
+        "reissaan Kaakkois-Aasiassa",
+        "kehittelen omia projekteja",
+        "mietin, mitä seuraavaksi...",
+        "avoin uusille työmahdollisuuksille alkuvuodesta 2027",
+      ],
     },
     interests: {
       label: "kiinnostuksen kohteet",
